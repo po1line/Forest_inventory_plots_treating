@@ -136,12 +136,15 @@ def get_cluster_pixels_PCA(data:pd.DataFrame, key: int = 1)->pd.DataFrame:
     visualizer = KElbowVisualizer(model, k=(1,8), timings= True)
     visualizer.fit(scaled_data)        # Fit data to visualizer
     plt.close()
-
+    elbow_value = visualizer.elbow_value_
+    if elbow_value == None:
+        elbow_value = 2
     kmeans_model = KMeans(n_clusters = visualizer.elbow_value_, random_state=100) # elbow_value_ == number of clusters
     kmeans_model.fit(scaled_data)
 
     attmpt_pca_step["clusters"] = kmeans_model.labels_
     #attmpt.clusters.value_counts().reset_index()#.duplicated(subset=['clusters'])#.iloc[0,0]
+   
     return attmpt_pca_step        
 
 ##selection of rows related to most abundant clusters (PCA option)
