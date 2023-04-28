@@ -5,30 +5,24 @@ import geopandas as gpd
 import numpy as np
 import matplotlib.pyplot as plt
 
+#clustering
 from shapely import affinity
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression, RidgeClassifier
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, IsolationForest
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
-from sklearn import metrics
-from sklearn.model_selection import train_test_split
-from sklearn.utils.class_weight import compute_class_weight
-from sklearn.metrics import make_scorer
-
 from yellowbrick.cluster import KElbowVisualizer
 
 #for PCA option
 from sklearn.decomposition import PCA
 
-###functions
 
+###functions###
 
-def get_cluster_pixels(data:pd.DataFrame, key: int = 1, correlation_threshold:float=0.7)->pd.DataFrame: 
+def get_cluster_pixels(data:pd.DataFrame, 
+                       key: int = 1, 
+                       correlation_threshold:float=0.7,
+                       max_number_of_clusters: int = 5)->pd.DataFrame: 
     attmpt = data[data.key == key]
     attmpt_c = attmpt.drop(columns = ['key', 'class']).corr().abs() #'index',
     #attmpt.corr().style.background_gradient(cmap="Blues")
@@ -50,7 +44,7 @@ def get_cluster_pixels(data:pd.DataFrame, key: int = 1, correlation_threshold:fl
     #from yellowbrick.cluster import KElbowVisualizer
     model = KMeans(n_init=10)
     # k is range of number of clusters.
-    visualizer = KElbowVisualizer(model, k=(1,8), timings= True)
+    visualizer = KElbowVisualizer(model, k=(1,max_number_of_clusters), timings= True)
     visualizer.fit(scaled_data)        # Fit data to visualizer
     plt.close()
     elbow_value = visualizer.elbow_value_
