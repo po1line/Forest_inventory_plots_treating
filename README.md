@@ -1,5 +1,4 @@
-# Forest inventory plots treating: spatial data preparation for test sample size increasing
-
+# Forest inventory plots treating: spatial data filtering for representative label data selection
 
 Forest inventory is an essential source of information that can be used for ecosystem productivity monitoring and spatial carbon accounting. One of the common ways to provide such inventory is to describe target characteristics (tree type, height, age, carbon stocks) on the level of ``forest inventory plot``. Specifics and limitations of inventory plots are that they are relatively small, which allows making precise estimations at chosen locations, but makes it difficult to combine such data with open-source satellite imagery because of the small radius of inventory plot (e.g. 9 meters, while the size of Sentinel image pixel equals to 10 m).
 To cope with this limitation, the radius of the inventory plot could be manually increased, which in turn increases the number of pixels with information. This could be crucial for image classification tasks, where the amount of labelled data directly influences the quality of predictions. At such a manual radius increase, a question remains: how representative is the data compared to the initial inventory plot data?
