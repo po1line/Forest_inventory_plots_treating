@@ -51,4 +51,14 @@ The test data was made using the fusion of data from inventory plots and resampl
 * ``key`` – inventory plot number
 * ``class`` – dominant land cover or tree type
 
+## Functions description:
+
+1. ``get_cluster_pixels gets`` function requires the following arguments:   
+* ``data`` – pandas DataFrame;
+*  ``key`` – inventory plot number; 
+*  ``correlation_threshold`` – a value for correlation between features to exclude highly correlated ones, takes values from 0 to 1. By default, it is 0.7;
+*  max_number_of_clusters – a value of expected types of trees or land cover types on the plot. By default, it is 5 for the territory of the study corresponding to test data.
+
+2. ``get_selection`` function requires the following arguments:  
+* ``data`` – pandas DataFrame.
 
